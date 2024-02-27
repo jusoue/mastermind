@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(mastermind
     src/main.cpp
+    src/board.cpp
+    src/row.cpp
 )
 
 add_subdirectory(lib/raylib)

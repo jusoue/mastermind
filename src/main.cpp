@@ -1,15 +1,17 @@
 #include "raylib.h"
+#include "constants.h"
+#include "board.h"
 
 int main(int argc, char** argv)
 {
-    InitWindow(800, 800, "raylib [core] example - basic window");
+    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Mastermind");
 
+    Board board(5, Vector2{25, 25});
     while (!WindowShouldClose())
     {
         BeginDrawing();
             ClearBackground(RAYWHITE);
-            DrawRectangle(25, 25, 400, 600, BROWN);
-            DrawRectangleLines(25, 25, 400, 600, BLACK);
+            board.drawBoard();
         EndDrawing();
     }
 

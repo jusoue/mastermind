@@ -1,0 +1,4 @@
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 800
+#define ROW_HEIGHT 100
+#define ROW_WIDTH 400

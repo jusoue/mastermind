@@ -1,5 +1,5 @@
-C:/dev/mastermind/build/CMakeFiles/PACKAGE.dir
 C:/dev/mastermind/build/CMakeFiles/mastermind.dir
+C:/dev/mastermind/build/CMakeFiles/PACKAGE.dir
 C:/dev/mastermind/build/CMakeFiles/INSTALL.dir
 C:/dev/mastermind/build/CMakeFiles/ALL_BUILD.dir
 C:/dev/mastermind/build/CMakeFiles/ZERO_CHECK.dir
