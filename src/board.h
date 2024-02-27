@@ -13,6 +13,7 @@ public:
 
 private:
     int nb_rows = 0;
+    int nb_coloumns = 0;
     Vector2 position = Vector2{0, 0};
     std::vector<Row> rows;
 };

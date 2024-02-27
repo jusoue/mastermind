@@ -10,6 +10,9 @@ public:
     void drawRow();
 
 private:
+    void drawHintTile(int pos_x, int pos_y, Color color);
+    void drawTile(int pos_x, int pos_y, Color color);
+
     Board* board = nullptr;
     int pos = 0;
 };
