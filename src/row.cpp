@@ -53,5 +53,6 @@ void Row::drawTile(int pos_x, int pos_y, Color color)
     int center_x = pos_x + (COLUMN_WIDTH / 2);
     int center_y = pos_y + (ROW_HEIGHT / 2);
     float radius = (ROW_HEIGHT / 2 * 0.6f);
+    
     DrawCircle(center_x, center_y, radius, DARKBROWN);
 }

@@ -12,6 +12,8 @@ public:
     Vector2 getPosition();
 
 private:
+    void drawColorChoices();
+
     int nb_rows = 0;
     int nb_coloumns = 0;
     Vector2 position = Vector2{0, 0};
