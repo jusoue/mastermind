@@ -7,6 +7,8 @@ add_executable(mastermind
     src/main.cpp
     src/board.cpp
     src/row.cpp
+    src/colorButton.cpp
+    src/rectangleButton.cpp
 )
 
 add_subdirectory(lib/raylib)
