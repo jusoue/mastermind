@@ -7,11 +7,13 @@ int main(int argc, char** argv)
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Mastermind");
 
     Board board(5, Vector2{25, 25});
+    SetTraceLogLevel(LOG_DEBUG);
     while (!WindowShouldClose())
     {
         BeginDrawing();
             ClearBackground(RAYWHITE);
-            board.drawBoard();
+            board.draw();
+            board.update();
         EndDrawing();
     }
 

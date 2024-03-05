@@ -7,11 +7,11 @@ class Row
 {
 public:
     Row(Board* parent, int pos);
-    void drawRow();
+    void drawRow() const;
 
 private:
-    void drawHintTile(int pos_x, int pos_y, Color color);
-    void drawTile(int pos_x, int pos_y, Color color);
+    void drawHintTile(int pos_x, int pos_y, Color color) const;
+    void drawTile(int pos_x, int pos_y, Color color) const;
 
     Board* board = nullptr;
     int pos = 0;

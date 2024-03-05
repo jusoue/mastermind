@@ -8,7 +8,7 @@ Row::Row(Board* parent, int pos)
 
 }
 
-void Row::drawRow()
+void Row::drawRow() const
 {
     int pos_x = board->getPosition().x;
     int pos_y = board->getPosition().y + (ROW_HEIGHT * pos);
@@ -27,7 +27,7 @@ void Row::drawRow()
     }
 }
 
-void Row::drawHintTile(int pos_x, int pos_y, Color color)
+void Row::drawHintTile(int pos_x, int pos_y, Color color) const
 {
     DrawRectangle(pos_x, pos_y, COLUMN_WIDTH, ROW_HEIGHT, color);
     DrawRectangleLines(pos_x, pos_y, COLUMN_WIDTH, ROW_HEIGHT, BLACK);
@@ -44,7 +44,7 @@ void Row::drawHintTile(int pos_x, int pos_y, Color color)
     DrawCircle(center_x + offset, center_y + offset, radius, BLACK);
 }
 
-void Row::drawTile(int pos_x, int pos_y, Color color)
+void Row::drawTile(int pos_x, int pos_y, Color color) const
 {
     DrawRectangle(pos_x, pos_y, COLUMN_WIDTH, ROW_HEIGHT, color);
     DrawRectangleLines(pos_x, pos_y, COLUMN_WIDTH, ROW_HEIGHT, BLACK);

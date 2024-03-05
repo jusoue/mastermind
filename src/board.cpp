@@ -23,17 +23,29 @@ Board::Board(int nb_rows, Vector2 pos)
 
         color_buttons.push_back(button);
     }
+
+    float pos_y = position.y + (nb_rows * ROW_HEIGHT) + 150;
+    float pos_x = position.x;
+
+    back_button = RectangleButton({ pos_x, pos_y }, {ROW_WIDTH / 2 - 50, 50}, GRAY);
+    enter_button = RectangleButton({ pos_x + ROW_WIDTH - ROW_WIDTH / 2 + 50, pos_y }, {ROW_WIDTH / 2 - 50, 50}, GRAY);
 }
 
-void Board::drawBoard()
+void Board::draw() const
 {
     for (int i = 0; i < rows.size(); i++)
     {
         rows[i].drawRow();
     }
 
-    drawColorButtons();
+    drawButtons();
+}
+
+void Board::update()
+{
     checkColorButtons();
+    checkBackButton();
+    checkEnterButton();
 }
 
 Vector2 Board::getPosition()
@@ -47,19 +59,37 @@ void Board::checkColorButtons()
     {
         if (button.isPressed())
         {
-            SetTraceLogLevel(LOG_DEBUG);
             TraceLog(LOG_DEBUG, "test");
         }
     }
 }
 
-void Board::drawColorButtons()
+void Board::checkBackButton()
+{
+    if (back_button.isPressed())
+    {
+        TraceLog(LOG_DEBUG, "back");
+    }
+}
+
+void Board::checkEnterButton()
+{
+    if (enter_button.isPressed())
+    {
+        TraceLog(LOG_DEBUG, "enter");
+    }
+}
+
+void Board::drawButtons() const
 {
     for (const auto& button : color_buttons)
     {
         button.draw();
     }
 
-    // DrawRectangle(choices_x + ((radius * 2) + 30) * 6, choices_y - 30, 100, 25, GRAY);
-    // DrawRectangle(choices_x + ((radius * 2) + 30) * 6, choices_y + 5, 100, 25, GRAY);
+    float pos_y = position.y + (nb_rows * ROW_HEIGHT) + 150;
+    float pos_x = position.x;
+
+    back_button.draw();
+    enter_button.draw();
 }
