@@ -7,7 +7,7 @@
 #define ROW_WIDTH 500
 #define COLUMN_WIDTH 100
 
-enum class PieceColor {yellow, red, purple, green, blue, orange};
+enum class PieceColor {yellow, red, purple, green, blue, orange, empty};
 
 constexpr Color toColor(PieceColor piece_color)
 {
@@ -19,6 +19,6 @@ constexpr Color toColor(PieceColor piece_color)
     case PieceColor::green: return GREEN;
     case PieceColor::blue: return BLUE;
     case PieceColor::orange: return ORANGE;
-    default: return BLACK;
+    default: return DARKBROWN;
     };
 }

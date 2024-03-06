@@ -59,7 +59,7 @@ void Board::checkColorButtons()
     {
         if (button.isPressed())
         {
-            TraceLog(LOG_DEBUG, "test");
+            rows[turn].addColorToGuess(button.getColor());
         }
     }
 }
@@ -68,7 +68,7 @@ void Board::checkBackButton()
 {
     if (back_button.isPressed())
     {
-        TraceLog(LOG_DEBUG, "back");
+        rows[turn].removeColorToGuess();
     }
 }
 

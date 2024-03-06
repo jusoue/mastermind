@@ -22,7 +22,8 @@ void Row::drawRow() const
         }
         else
         {
-            drawTile(pos_x + (i * COLUMN_WIDTH), pos_y, BROWN);
+            drawTile(pos_x + (i * COLUMN_WIDTH), pos_y,
+            (guessed_colors.size() > i) ? guessed_colors[i] : PieceColor::empty);
         }
     }
 }
@@ -44,9 +45,9 @@ void Row::drawHintTile(int pos_x, int pos_y, Color color) const
     DrawCircle(center_x + offset, center_y + offset, radius, BLACK);
 }
 
-void Row::drawTile(int pos_x, int pos_y, Color color) const
+void Row::drawTile(int pos_x, int pos_y, PieceColor color) const
 {
-    DrawRectangle(pos_x, pos_y, COLUMN_WIDTH, ROW_HEIGHT, color);
+    DrawRectangle(pos_x, pos_y, COLUMN_WIDTH, ROW_HEIGHT, BROWN);
     DrawRectangleLines(pos_x, pos_y, COLUMN_WIDTH, ROW_HEIGHT, BLACK);
 
     // draw one circle in the center of the tile
@@ -54,5 +55,23 @@ void Row::drawTile(int pos_x, int pos_y, Color color) const
     int center_y = pos_y + (ROW_HEIGHT / 2);
     float radius = (ROW_HEIGHT / 2 * 0.6f);
     
-    DrawCircle(center_x, center_y, radius, DARKBROWN);
+    DrawCircle(center_x, center_y, radius, toColor(color));
+}
+
+void Row::addColorToGuess(PieceColor color)
+{
+    if (guessed_colors.size() < 4)
+    {
+        guessed_colors.push_back(color);
+    }
+
+}
+
+void Row::removeColorToGuess()
+{
+    if (!guessed_colors.empty())
+    {
+        guessed_colors.pop_back();
+    }
+
 }
