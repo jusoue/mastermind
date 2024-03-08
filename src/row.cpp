@@ -8,7 +8,7 @@ Row::Row(Board* parent, int pos)
 
 }
 
-void Row::drawRow() const
+void Row::draw() const
 {
     int pos_x = board->getPosition().x;
     int pos_y = board->getPosition().y + (ROW_HEIGHT * pos);
@@ -18,7 +18,7 @@ void Row::drawRow() const
     {
         if (i == 4)
         {
-            drawHintTile(pos_x + (i * COLUMN_WIDTH), pos_y, DARKBROWN);
+            drawHintTile(pos_x + (i * COLUMN_WIDTH), pos_y);
         }
         else
         {
@@ -28,9 +28,9 @@ void Row::drawRow() const
     }
 }
 
-void Row::drawHintTile(int pos_x, int pos_y, Color color) const
+void Row::drawHintTile(int pos_x, int pos_y) const
 {
-    DrawRectangle(pos_x, pos_y, COLUMN_WIDTH, ROW_HEIGHT, color);
+    DrawRectangle(pos_x, pos_y, COLUMN_WIDTH, ROW_HEIGHT, DARKBROWN);
     DrawRectangleLines(pos_x, pos_y, COLUMN_WIDTH, ROW_HEIGHT, BLACK);
 
     // draw four circles for the four hints
@@ -39,10 +39,20 @@ void Row::drawHintTile(int pos_x, int pos_y, Color color) const
     float radius = (ROW_HEIGHT / 2 * 0.3f);
     int offset = (ROW_HEIGHT / 2 * 0.4f);
 
-    DrawCircle(center_x - offset, center_y - offset, radius, BLACK);
-    DrawCircle(center_x + offset, center_y - offset, radius, BLACK);
-    DrawCircle(center_x - offset, center_y + offset, radius, BLACK);
-    DrawCircle(center_x + offset, center_y + offset, radius, BLACK);
+    if (auto hints = board->getHints(pos))
+    {
+        DrawCircle(center_x - offset, center_y - offset, radius, toColor((*hints)[0]));
+        DrawCircle(center_x + offset, center_y - offset, radius, toColor((*hints)[1]));
+        DrawCircle(center_x - offset, center_y + offset, radius, toColor((*hints)[2]));
+        DrawCircle(center_x + offset, center_y + offset, radius, toColor((*hints)[3]));
+    }
+    else
+    {
+        DrawCircle(center_x - offset, center_y - offset, radius, BLACK);
+        DrawCircle(center_x + offset, center_y - offset, radius, BLACK);
+        DrawCircle(center_x - offset, center_y + offset, radius, BLACK);
+        DrawCircle(center_x + offset, center_y + offset, radius, BLACK);
+    }
 }
 
 void Row::drawTile(int pos_x, int pos_y, PieceColor color) const
@@ -72,4 +82,9 @@ void Row::removeColorToGuess()
     {
         guessed_colors.pop_back();
     }
+}
+
+std::vector<PieceColor> Row::getGuessedColors()
+{
+    return guessed_colors;
 }

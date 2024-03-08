@@ -8,12 +8,13 @@
 #define COLUMN_WIDTH 100
 
 enum class PieceColor {yellow, red, purple, green, blue, orange, empty};
+enum class PieceHint {correct, wrong, misplaced};
 
 constexpr Color toColor(PieceColor piece_color)
 {
     switch(piece_color)
     {
-    case PieceColor::yellow: return Color{ 255, 225, 0, 255 };
+    case PieceColor::yellow: return Color{ 255, 225, 0, 255 }; // YELLOW is too bright
     case PieceColor::red: return RED;
     case PieceColor::purple: return PURPLE;
     case PieceColor::green: return GREEN;
@@ -21,4 +22,15 @@ constexpr Color toColor(PieceColor piece_color)
     case PieceColor::orange: return ORANGE;
     default: return DARKBROWN;
     };
+}
+
+constexpr Color toColor(PieceHint piece_hint)
+{
+    switch(piece_hint)
+    {
+    case PieceHint::correct: return DARKGREEN;
+    case PieceHint::wrong: return RED;
+    case PieceHint::misplaced: return Color{ 255, 225, 0, 255 };
+    default: return BLACK;
+    }
 }

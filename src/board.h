@@ -1,4 +1,5 @@
 #pragma once
+#include <array>
 #include <vector>
 #include "raylib.h"
 
@@ -13,6 +14,7 @@ public:
     void draw() const;
     void update();
     Vector2 getPosition();
+    std::array<PieceHint, 4>* getHints(int index);
 
 private:
     void checkColorButtons();
@@ -21,7 +23,6 @@ private:
     void drawButtons() const;
 
     int nb_rows = 0;
-    int nb_coloumns = 0;
     Vector2 position = Vector2{0, 0};
     std::vector<Row> rows;
     int turn = 0;
@@ -29,4 +30,7 @@ private:
     std::vector<ColorButton> color_buttons;
     RectangleButton back_button;
     RectangleButton enter_button;
+
+    std::array<PieceColor, 4> colors_to_guess;
+    std::vector<std::array<PieceHint, 4>> row_hints;
 };
