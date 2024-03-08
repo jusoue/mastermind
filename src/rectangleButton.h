@@ -1,5 +1,6 @@
 #pragma once
 #include "button.h"
+#include <string>
 
 class RectangleButton : public IButton
 {
@@ -10,9 +11,11 @@ public:
 
     void draw() const override;
     bool isPressed() const override;
+    void setText(const std::string& text);
 
 private:
     Vector2 pos = {0, 0};
     Vector2 size = {0, 0};
     Color color;
+    std::string label = "";
 };

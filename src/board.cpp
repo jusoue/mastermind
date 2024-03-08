@@ -29,6 +29,9 @@ Board::Board(int nb_rows, Vector2 pos)
 
     back_button = RectangleButton({ pos_x, pos_y }, {ROW_WIDTH / 2 - 50, 50}, GRAY);
     enter_button = RectangleButton({ pos_x + ROW_WIDTH - ROW_WIDTH / 2 + 50, pos_y }, {ROW_WIDTH / 2 - 50, 50}, GRAY);
+
+    back_button.setText("Back");
+    enter_button.setText("Enter");
 }
 
 void Board::draw() const

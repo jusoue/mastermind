@@ -64,7 +64,6 @@ void Row::addColorToGuess(PieceColor color)
     {
         guessed_colors.push_back(color);
     }
-
 }
 
 void Row::removeColorToGuess()
@@ -73,5 +72,4 @@ void Row::removeColorToGuess()
     {
         guessed_colors.pop_back();
     }
-
 }
