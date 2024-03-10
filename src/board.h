@@ -20,12 +20,16 @@ private:
     void checkColorButtons();
     void checkBackButton();
     void checkEnterButton();
+    void checkGameOver();
+    void checkVictory();
     void drawButtons() const;
 
     int nb_rows = 0;
     Vector2 position = Vector2{0, 0};
     std::vector<Row> rows;
     int turn = 0;
+    bool is_game_over = false;
+    bool is_victory = false;
 
     std::vector<ColorButton> color_buttons;
     RectangleButton back_button;

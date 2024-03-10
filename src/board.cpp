@@ -51,13 +51,22 @@ void Board::draw() const
     }
 
     drawButtons();
+
+    if (is_game_over)
+    {
+        const char* message = is_victory ? "You won!" : "You lost.";
+        DrawText(message, 600, 400, 30, BLACK);
+    }
 }
 
 void Board::update()
 {
-    checkColorButtons();
-    checkBackButton();
-    checkEnterButton();
+    if (!is_game_over)
+    {
+        checkColorButtons();
+        checkBackButton();
+        checkEnterButton();
+    }
 }
 
 Vector2 Board::getPosition()
@@ -119,10 +128,37 @@ void Board::checkEnterButton()
         }
     }
 
+    checkVictory();
+
     row_hints.push_back(hints);
     turn++;
 
-    // if turn = nb_rows -> game finished
+    checkGameOver();
+}
+
+void Board::checkGameOver()
+{
+    if (is_game_over)
+        return;
+
+    if (turn == nb_rows)
+        is_game_over = true;
+}
+
+void Board::checkVictory()
+{
+    int count = 0;
+    for (int i = 0; i < 4; i++)
+    {
+        if (colors_to_guess[i] == rows[turn].getGuessedColors()[i])
+            count++;
+    }
+
+    if (count == 4)
+    {
+        is_game_over = true;
+        is_victory = true;
+    }
 }
 
 void Board::drawButtons() const
