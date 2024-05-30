@@ -7,6 +7,62 @@
 Board::Board(int nb_rows, Vector2 pos)
     : nb_rows{nb_rows}, position{pos}
 {
+    float pos_y = position.y + (nb_rows * ROW_HEIGHT) + 150;
+    float pos_x = position.x;
+
+    back_button = RectangleButton({ pos_x, pos_y }, {BUTTON_WIDTH, 50}, GRAY);
+    enter_button = RectangleButton({ pos_x + ROW_WIDTH - ROW_WIDTH / 2 + 50, pos_y }, {BUTTON_WIDTH, 50}, GRAY);
+    try_again_button = RectangleButton({BOARD_END + ((WINDOW_WIDTH - (BOARD_END) - (BUTTON_WIDTH)) / 2), 450}, {BUTTON_WIDTH, 50}, GRAY);
+
+    back_button.setText("Back");
+    enter_button.setText("Enter");
+    try_again_button.setText("Try Again");
+
+    initialize();
+}
+
+void Board::draw() const
+{
+    for (int i = 0; i < rows.size(); i++)
+    {
+        rows[i].draw();
+    }
+
+    drawButtons();
+
+    if (is_game_over)
+    {
+        gameOver();
+    }
+}
+
+void Board::update()
+{
+    if (!is_game_over)
+    {
+        checkColorButtons();
+        checkBackButton();
+        checkEnterButton();
+    }
+    
+    checkTryAgainButton();
+}
+
+Vector2 Board::getPosition()
+{
+    return position;
+}
+
+std::array<PieceHint, 4>* Board::getHints(int index)
+{
+    if (index >= row_hints.size())
+        return nullptr;
+
+    return &row_hints[index];
+}
+
+void Board::initialize()
+{
     for (int i = 0; i < nb_rows; i++)
     {
         Row row(this, i);
@@ -27,15 +83,6 @@ Board::Board(int nb_rows, Vector2 pos)
         color_buttons.push_back(button);
     }
 
-    float pos_y = position.y + (nb_rows * ROW_HEIGHT) + 150;
-    float pos_x = position.x;
-
-    back_button = RectangleButton({ pos_x, pos_y }, {ROW_WIDTH / 2 - 50, 50}, GRAY);
-    enter_button = RectangleButton({ pos_x + ROW_WIDTH - ROW_WIDTH / 2 + 50, pos_y }, {ROW_WIDTH / 2 - 50, 50}, GRAY);
-
-    back_button.setText("Back");
-    enter_button.setText("Enter");
-
     srand(time(nullptr));
     for (int i = 0; i < 4; i++)
     {
@@ -43,43 +90,15 @@ Board::Board(int nb_rows, Vector2 pos)
     }
 }
 
-void Board::draw() const
+void Board::clearBoard()
 {
-    for (int i = 0; i < rows.size(); i++)
-    {
-        rows[i].draw();
-    }
+    is_game_over = false;
+    is_victory = false;
+    turn = 0;
 
-    drawButtons();
-
-    if (is_game_over)
-    {
-        const char* message = is_victory ? "You won!" : "You lost.";
-        DrawText(message, 600, 400, 30, BLACK);
-    }
-}
-
-void Board::update()
-{
-    if (!is_game_over)
-    {
-        checkColorButtons();
-        checkBackButton();
-        checkEnterButton();
-    }
-}
-
-Vector2 Board::getPosition()
-{
-    return position;
-}
-
-std::array<PieceHint, 4>* Board::getHints(int index)
-{
-    if (index >= row_hints.size())
-        return nullptr;
-
-    return &row_hints[index];
+    rows.clear();
+    color_buttons.clear();
+    row_hints.clear();
 }
 
 void Board::checkColorButtons()
@@ -136,6 +155,15 @@ void Board::checkEnterButton()
     checkGameOver();
 }
 
+void Board::checkTryAgainButton()
+{
+    if (!try_again_button.isPressed())
+        return;
+    
+    clearBoard();
+    initialize();
+}
+
 void Board::checkGameOver()
 {
     if (is_game_over)
@@ -173,4 +201,13 @@ void Board::drawButtons() const
 
     back_button.draw();
     enter_button.draw();
+}
+
+void Board::gameOver() const
+{
+    const char* message = is_victory ? "You won!" : "You lost.";
+    Vector2 text_size = MeasureTextEx(GetFontDefault(), message, 30, 0);
+    DrawText(message, BOARD_END + ((WINDOW_WIDTH - (BOARD_END) - text_size.x) / 2), 400, 30, BLACK);
+
+    try_again_button.draw();
 }

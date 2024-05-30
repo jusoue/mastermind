@@ -1,11 +1,13 @@
 #pragma once
 #include "raylib.h"
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 800
-#define ROW_HEIGHT 100
-#define ROW_WIDTH 500
-#define COLUMN_WIDTH 100
+const int WINDOW_WIDTH = 800;
+const int WINDOW_HEIGHT = 800;
+const int ROW_HEIGHT = 100;
+const int ROW_WIDTH = 500;
+const int COLUMN_WIDTH = 100;
+const int BUTTON_WIDTH = ROW_WIDTH / 2 - 50;
+const int BOARD_END = 25 + ROW_WIDTH;
 
 enum class PieceColor {yellow, red, purple, green, blue, orange, empty};
 enum class PieceHint {correct, wrong, misplaced};

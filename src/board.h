@@ -17,12 +17,18 @@ public:
     std::array<PieceHint, 4>* getHints(int index);
 
 private:
+    void initialize();
+    void clearBoard();
+
     void checkColorButtons();
     void checkBackButton();
     void checkEnterButton();
+    void checkTryAgainButton();
+
     void checkGameOver();
     void checkVictory();
     void drawButtons() const;
+    void gameOver() const;
 
     int nb_rows = 0;
     Vector2 position = Vector2{0, 0};
@@ -34,6 +40,7 @@ private:
     std::vector<ColorButton> color_buttons;
     RectangleButton back_button;
     RectangleButton enter_button;
+    RectangleButton try_again_button;
 
     std::array<PieceColor, 4> colors_to_guess;
     std::vector<std::array<PieceHint, 4>> row_hints;
