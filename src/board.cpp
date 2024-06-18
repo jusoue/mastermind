@@ -14,26 +14,22 @@ Board::Board(int nb_rows, Vector2 pos)
     enter_button = RectangleButton({ pos_x + ROW_WIDTH - ROW_WIDTH / 2 + 50, pos_y }, {BUTTON_WIDTH, 50}, GRAY);
     try_again_button = RectangleButton({BOARD_END + ((WINDOW_WIDTH - (BOARD_END) - (BUTTON_WIDTH)) / 2), 450}, {BUTTON_WIDTH, 50}, GRAY);
 
-    back_button.setText("Back");
-    enter_button.setText("Enter");
-    try_again_button.setText("Try Again");
+    // TODO: Nommez le texte sur les boutons du jeu
 
-    initialize();
+
+
+    // TODO: Initialiser le board
+    
 }
 
 void Board::draw() const
 {
-    for (int i = 0; i < rows.size(); i++)
-    {
-        rows[i].draw();
-    }
+    // TODO: Dessiner toutes les rangées du board
 
-    drawButtons();
+    // TODO: Dessiner tous les boutons
 
-    if (is_game_over)
-    {
-        gameOver();
-    }
+    // TODO: Dessiner les éléments de fin de jeu si je la partie est terminée
+   
 }
 
 void Board::update()
@@ -203,7 +199,7 @@ void Board::drawButtons() const
     enter_button.draw();
 }
 
-void Board::gameOver() const
+void Board::drawGameOver() const
 {
     const char* message = is_victory ? "You won!" : "You lost.";
     Vector2 text_size = MeasureTextEx(GetFontDefault(), message, 30, 0);
