@@ -32,7 +32,7 @@ void Board::draw() const
 
     if (is_game_over)
     {
-        gameOver();
+        drawGameOver();
     }
 }
 
@@ -203,7 +203,7 @@ void Board::drawButtons() const
     enter_button.draw();
 }
 
-void Board::gameOver() const
+void Board::drawGameOver() const
 {
     const char* message = is_victory ? "You won!" : "You lost.";
     Vector2 text_size = MeasureTextEx(GetFontDefault(), message, 30, 0);

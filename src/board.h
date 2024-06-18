@@ -28,7 +28,7 @@ private:
     void checkGameOver();
     void checkVictory();
     void drawButtons() const;
-    void gameOver() const;
+    void drawGameOver() const;
 
     int nb_rows = 0;
     Vector2 position = Vector2{0, 0};
