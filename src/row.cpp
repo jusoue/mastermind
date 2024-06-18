@@ -65,14 +65,17 @@ void Row::drawTile(int pos_x, int pos_y, PieceColor color) const
     int center_y = pos_y + (ROW_HEIGHT / 2);
     float radius = (ROW_HEIGHT / 2 * 0.6f);
     
-    DrawCircle(center_x, center_y, radius, toColor(color));
+    // TODO: Dessiner un cercle au bon endroit et de la bonne couleur.
+    // Indice: il est possible de passer d'un objet PieceColor à un objet Color grâce à la fonction toColor()
+    
 }
 
 void Row::addColorToGuess(PieceColor color)
 {
     if (guessed_colors.size() < 4)
     {
-        guessed_colors.push_back(color);
+        // TODO:: on ajoute la couleur aux couleurs devinées (guessed_colors)
+        
     }
 }
 
@@ -80,7 +83,8 @@ void Row::removeColorToGuess()
 {
     if (!guessed_colors.empty())
     {
-        guessed_colors.pop_back();
+        // TODO:: on enlève la couleur des couleurs devinées (guessed_colors)
+        
     }
 }
 

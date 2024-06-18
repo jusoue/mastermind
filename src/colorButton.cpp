@@ -1,15 +1,19 @@
 #include "colorButton.h"
 
 ColorButton::ColorButton(Vector2 center, float radius, PieceColor piece_color)
-    : center(center), radius(radius), piece_color(piece_color)
 {
+    // TODO: Initialiser toutes les variables nécessaires
+
+
 
 }
 
 void ColorButton::draw() const
 {
-    DrawCircleV(center, radius, toColor(piece_color));
-    DrawCircleLinesV(center, radius, BLACK);
+    // TODO: Dessiner le cercle et le contour du cercle au bon endroit. Indice: la fonction toColor() permet de passer
+    //       d'un objet PieceColor à un objet Color. Le contour du cercle doit être noir
+    
+    
 }
 
 bool ColorButton::isPressed() const

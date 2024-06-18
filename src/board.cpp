@@ -34,14 +34,10 @@ void Board::draw() const
 
 void Board::update()
 {
-    if (!is_game_over)
-    {
-        checkColorButtons();
-        checkBackButton();
-        checkEnterButton();
-    }
-    
-    checkTryAgainButton();
+    // TODO: Si le jeu n'est pas fini, vérifier l'état de tous les boutons. Sinon, vérifier l'était du bouton "Try Again"
+   
+
+   
 }
 
 Vector2 Board::getPosition()
@@ -59,26 +55,23 @@ std::array<PieceHint, 4>* Board::getHints(int index)
 
 void Board::initialize()
 {
-    for (int i = 0; i < nb_rows; i++)
-    {
-        Row row(this, i);
-        rows.push_back(row);
-    }
+    // TODO: Créer le bon nombre de rangées (Row) puis les mettre dans l'objet rows
+
+
+
 
     float radius = 30;
     float center_y = position.y + (nb_rows * ROW_HEIGHT) + 100;
     for (int i = 0; i < 6; i++)
     {
         float center_x = position.x + radius + (i * 90);
-        ColorButton button(
-            {center_x , center_y}, 
-            radius, 
-            PieceColor(i)
-        );
+        // TODO: Créer un bouton de la bonne couleur puis le mettre dans l'objet color_buttons
+        
 
-        color_buttons.push_back(button);
+
     }
 
+    // On choisit la suite de 4 couleurs à deviner au hasard
     srand(time(nullptr));
     for (int i = 0; i < 4; i++)
     {
@@ -101,19 +94,21 @@ void Board::checkColorButtons()
 {
     for (const auto& button : color_buttons)
     {
-        if (button.isPressed())
-        {
-            rows[turn].addColorToGuess(button.getColor());
-        }
+        // TODO: Si un des boutons de couleur est appuyé, on ajoute la couleur du bouton au guess du joueur
+        // Indice: la variable "turn" indique à quelle tour (ou rangée du plateau...) on est
+
+
+
     }
 }
 
 void Board::checkBackButton()
 {
-    if (back_button.isPressed())
-    {
-        rows[turn].removeColorToGuess();
-    }
+    // TODO: Si le bouton pour enlever une couleur du guess est appuyé, on enlève la couleur du guess
+    // Indice: la variable "turn" indique à quelle tour (ou rangée du plateau...) on est
+
+
+
 }
 
 void Board::checkEnterButton()
@@ -143,21 +138,22 @@ void Board::checkEnterButton()
         }
     }
 
-    checkVictory();
+    // TODO: Vérifier si le joueur a gagné
+
 
     row_hints.push_back(hints);
     turn++;
 
-    checkGameOver();
+    // TODO: Vérifier si le joueur a perdu
+    
 }
 
 void Board::checkTryAgainButton()
 {
-    if (!try_again_button.isPressed())
-        return;
-    
-    clearBoard();
-    initialize();
+    // TODO: Si le bouton pour réessayer de jouer est appuyé, on réinitialise le tableau de jeu
+
+
+
 }
 
 void Board::checkGameOver()
@@ -165,8 +161,9 @@ void Board::checkGameOver()
     if (is_game_over)
         return;
 
-    if (turn == nb_rows)
-        is_game_over = true;
+    // TODO: si on a utilisé le nombre maximum de rangées, c'est game over!
+    
+
 }
 
 void Board::checkVictory()
@@ -178,11 +175,11 @@ void Board::checkVictory()
             count++;
     }
 
-    if (count == 4)
-    {
-        is_game_over = true;
-        is_victory = true;
-    }
+    // TODO: Si les 4 couleurs devinées sont bonnes, alors c'est game over et on a gagné!
+    
+
+
+
 }
 
 void Board::drawButtons() const

@@ -1,15 +1,19 @@
 #include "rectangleButton.h"
 
 RectangleButton::RectangleButton(Vector2 pos, Vector2 size, Color color)
-: pos(pos), size(size), color(color)
 {
+    // TODO: Initialiser toutes les variables nécessaires
+
+
 
 }
 
 void RectangleButton::draw() const
 {
-    DrawRectangleV(pos, size, color);
-    DrawRectangleLines(pos.x, pos.y, size.x, size.y, BLACK);
+    // TODO: Dessiner le rectangle du bouton et son coutour. 
+    // Le bouton doit avoir la bonne couleur et le contour doit être noir
+    
+    
 
     float text_size = 20;
     Vector2 text_mesurments = MeasureTextEx(GetFontDefault(), label.c_str(), text_size, 0);
